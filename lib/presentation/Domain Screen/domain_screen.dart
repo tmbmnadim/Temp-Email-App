@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tempemailsystemqtec/Custom%20Widgets/domain_selection_tile.dart';
-import 'package:tempemailsystemqtec/Custom%20Widgets/top_bar.dart';
-import 'package:tempemailsystemqtec/Provider/domains_provider.dart';
-import 'package:tempemailsystemqtec/Screens/Account/create_email_account.dart';
+import 'package:tempemailsystemqtec/domain/usecase/domains_provider.dart';
+import 'package:tempemailsystemqtec/presentation/Account/create_email_account.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/domain_selection_tile.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/top_bar.dart';
 
 class DomainScreen extends StatelessWidget {
   const DomainScreen({super.key});

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../consts.dart';
+import 'package:tempemailsystemqtec/consts.dart';
 import 'custom_widgets.dart';
 
 /// This is the bar under the navbar. I named it TopBar.

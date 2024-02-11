@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tempemailsystemqtec/Models/messages_model.dart';
-import '../consts.dart';
+import 'package:tempemailsystemqtec/consts.dart';
+import 'package:tempemailsystemqtec/data/Models/messages_model.dart';
 
 /// This is the widget that represents the email.
 

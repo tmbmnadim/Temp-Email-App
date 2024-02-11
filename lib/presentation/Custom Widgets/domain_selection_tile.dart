@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../consts.dart';
+import 'package:tempemailsystemqtec/consts.dart';
 
 /// This is the tile that shows the domain name.
 

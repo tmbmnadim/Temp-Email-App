@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:tempemailsystemqtec/Provider/account_provider.dart';
-import 'package:tempemailsystemqtec/Provider/domains_provider.dart';
-import 'package:tempemailsystemqtec/Provider/messages_provider.dart';
-import 'package:tempemailsystemqtec/Provider/token_provider.dart';
-import 'package:tempemailsystemqtec/Screens/domain/domain_screen.dart';
+import 'package:tempemailsystemqtec/presentation/Domain%20Screen/domain_screen.dart';
+
 import 'consts.dart';
+import 'domain/usecase/account_provider.dart';
+import 'domain/usecase/domains_provider.dart';
+import 'domain/usecase/messages_provider.dart';
+import 'domain/usecase/token_provider.dart';
 
 void main() {
   runApp(const MyApp());

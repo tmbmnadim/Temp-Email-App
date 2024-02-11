@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tempemailsystemqtec/Custom%20Widgets/my_widgets.dart';
-import 'package:tempemailsystemqtec/Custom%20Widgets/top_bar.dart';
-import 'package:tempemailsystemqtec/Provider/account_provider.dart';
 import 'package:tempemailsystemqtec/consts.dart';
+import 'package:tempemailsystemqtec/domain/usecase/account_provider.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/my_widgets.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/top_bar.dart';
 
 import 'login_screen.dart';
 

@@ -1,14 +1,11 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tempemailsystemqtec/Custom%20Widgets/message_box.dart';
-import 'package:tempemailsystemqtec/Custom%20Widgets/top_bar.dart';
-import 'package:tempemailsystemqtec/Provider/account_provider.dart';
-import 'package:tempemailsystemqtec/Provider/token_provider.dart';
 import 'package:tempemailsystemqtec/consts.dart';
-
-import '../../Provider/messages_provider.dart';
+import 'package:tempemailsystemqtec/domain/usecase/account_provider.dart';
+import 'package:tempemailsystemqtec/domain/usecase/messages_provider.dart';
+import 'package:tempemailsystemqtec/domain/usecase/token_provider.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/message_box.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/top_bar.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key});
@@ -49,7 +46,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               Provider.of<AccountProvider>(context, listen: false)
                   .getMyAccount(token: token);
             },
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
           ),
           IconButton(
             onPressed: () {
@@ -57,7 +54,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               Provider.of<TokenProvider>(context, listen: false).cleanToken();
               Navigator.pop(context);
             },
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
           ),
         ],
       ),
@@ -123,7 +120,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
                     /// ============== Messages Loading Indicator
                   } else {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                 },
               ),

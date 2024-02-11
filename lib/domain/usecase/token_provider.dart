@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tempemailsystemqtec/Models/login_token_model.dart';
-import 'package:tempemailsystemqtec/Repos/get_token_repo.dart';
+import 'package:tempemailsystemqtec/data/Models/login_token_model.dart';
+import 'package:tempemailsystemqtec/domain/repositories/get_token_repo.dart';
 
 class TokenProvider extends ChangeNotifier {
   TokenModel token = TokenModel();

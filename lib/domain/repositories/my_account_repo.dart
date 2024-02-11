@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
-import 'package:tempemailsystemqtec/Models/accounts_model.dart';
+import 'package:tempemailsystemqtec/data/Models/accounts_model.dart';
 
 Future<AccountModel> getMyAccountRepo({
   required String token,

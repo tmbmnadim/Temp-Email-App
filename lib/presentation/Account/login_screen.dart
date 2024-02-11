@@ -2,12 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:tempemailsystemqtec/Provider/token_provider.dart';
-import 'package:tempemailsystemqtec/Screens/Account/create_email_account.dart';
-import 'package:tempemailsystemqtec/Screens/Home/messages_screen.dart';
-
-import '../../Custom Widgets/my_widgets.dart';
-import '../../Custom Widgets/top_bar.dart';
+import 'package:tempemailsystemqtec/domain/usecase/token_provider.dart';
+import 'package:tempemailsystemqtec/presentation/Account/create_email_account.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/my_widgets.dart';
+import 'package:tempemailsystemqtec/presentation/Custom%20Widgets/top_bar.dart';
+import 'package:tempemailsystemqtec/presentation/Home/messages_screen.dart';
 import '../../consts.dart';
 
 class LoginScreen extends StatefulWidget {

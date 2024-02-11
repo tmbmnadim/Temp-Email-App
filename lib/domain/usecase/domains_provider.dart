@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tempemailsystemqtec/Models/domains_model.dart';
-import 'package:tempemailsystemqtec/Repos/get_domains_repo.dart';
+import 'package:tempemailsystemqtec/data/Models/domains_model.dart';
+import 'package:tempemailsystemqtec/domain/repositories/get_domains_repo.dart';
 
 class DomainsProvider extends ChangeNotifier{
   List<DomainsModel> domains = [];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tempemailsystemqtec/Models/accounts_model.dart';
-import 'package:tempemailsystemqtec/Repos/my_account_repo.dart';
-import '../Repos/create_accounts_repo.dart';
+import 'package:tempemailsystemqtec/data/Models/accounts_model.dart';
+import 'package:tempemailsystemqtec/domain/repositories/create_accounts_repo.dart';
+import 'package:tempemailsystemqtec/domain/repositories/my_account_repo.dart';
 
 class AccountProvider extends ChangeNotifier {
   AccountModel account = AccountModel();

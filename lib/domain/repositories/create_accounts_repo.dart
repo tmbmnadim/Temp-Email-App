@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
-import 'package:tempemailsystemqtec/Models/accounts_model.dart';
+import 'package:tempemailsystemqtec/data/Models/accounts_model.dart';
 
 Future<AccountModel> createAccountRepo({
   required String email,
@@ -16,7 +16,9 @@ Future<AccountModel> createAccountRepo({
         http.Request('POST', Uri.parse('https://api.mail.tm/accounts'));
     request.body = json.encode({"address": email, "password": password});
     request.headers.addAll(headers);
-    /// -------------------------------------------------------------------
+    /// --------------------------------------------------Generating Request
+
+
     /// ----------------Here the request is sent and a response is received
     http.StreamedResponse response = await request.send();
 

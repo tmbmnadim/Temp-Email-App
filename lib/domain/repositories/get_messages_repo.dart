@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
-import 'package:tempemailsystemqtec/Models/messages_model.dart';
+import 'package:tempemailsystemqtec/data/Models/messages_model.dart';
 
 Future<List<MessageModel>> getMessagesRepo({required String token}) async {
   List<MessageModel> messages = [];

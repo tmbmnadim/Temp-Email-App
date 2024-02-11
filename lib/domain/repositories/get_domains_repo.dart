@@ -1,7 +1,6 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:tempemailsystemqtec/Models/domains_model.dart';
+import 'package:tempemailsystemqtec/data/Models/domains_model.dart';
 
 String apiUrl = "https://api.mail.tm";
 
