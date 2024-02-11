@@ -20,6 +20,7 @@ class CustomWidgets {
     Color hintColor = Colors.black,
     Color labelColor = Colors.black,
     Color textColor = Colors.black,
+    Color cursorColor = Colors.black,
     var validator,
     TextInputType keyboardType = TextInputType.text,
   }) {
@@ -31,7 +32,7 @@ class CustomWidgets {
         style: TextStyle(
           color: textColor,
           fontSize: 16,
-        ),
+        ),cursorColor: cursorColor,
         onChanged: onChanged,
         enabled: enabled,
         keyboardType: keyboardType,
