@@ -1,5 +1,9 @@
-class MessagesModel {
+// ignore_for_file: unnecessary_new
+
+class MessageModel {
   String? id;
+  String? type;
+  String? aid;
   String? msgid;
   From? from;
   List<To>? to;
@@ -15,8 +19,10 @@ class MessagesModel {
   String? updatedAt;
   String? accountId;
 
-  MessagesModel(
+  MessageModel(
       {this.id,
+        this.type,
+        this.aid,
         this.msgid,
         this.from,
         this.to,
@@ -32,18 +38,16 @@ class MessagesModel {
         this.updatedAt,
         this.accountId});
 
-  MessagesModel.fromJson(Map<String, dynamic> json) {
+  MessageModel.fromJson(Map<String, dynamic> json) {
+    aid = json['@id'];
+    type = json['@type'];
     id = json['id'];
     msgid = json['msgid'];
-    if (json['from'] != null) {
-      from = From.fromJson(json['from']);
-    } else {
-      from = null;
-    }
+    from = json['from'] != null ? new From.fromJson(json['from']) : null;
     if (json['to'] != null) {
       to = <To>[];
       json['to'].forEach((v) {
-        to!.add(To.fromJson(v));
+        to!.add(new To.fromJson(v));
       });
     }
     subject = json['subject'];
@@ -61,6 +65,8 @@ class MessagesModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['@id'] = aid;
+    data['@type'] = type;
     data['id'] = id;
     data['msgid'] = msgid;
     if (from != null) {

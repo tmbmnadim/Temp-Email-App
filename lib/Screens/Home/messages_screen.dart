@@ -1,8 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tempemailsystemqtec/Custom%20Widgets/message_box.dart';
 import 'package:tempemailsystemqtec/Custom%20Widgets/top_bar.dart';
+import 'package:tempemailsystemqtec/Provider/account_provider.dart';
+import 'package:tempemailsystemqtec/Provider/token_provider.dart';
 import 'package:tempemailsystemqtec/consts.dart';
+
+import '../../Provider/messages_provider.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key});
@@ -12,10 +18,12 @@ class MessagesScreen extends StatefulWidget {
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
-
   @override
   void initState() {
-    Provider.of<MessagesProvider>(context)
+    String? token =
+        Provider.of<TokenProvider>(context, listen: false).token.token;
+    Provider.of<MessagesProvider>(context, listen: false)
+        .getDomains(token: token!);
     super.initState();
   }
 
@@ -26,15 +34,31 @@ class _MessagesScreenState extends State<MessagesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Temp Mail"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                String? token =
+                    Provider.of<TokenProvider>(context, listen: false)
+                        .token
+                        .token;
+                Provider.of<MessagesProvider>(context, listen: false)
+                    .getDomains(token: token!);
+              },
+              icon: Icon(Icons.refresh)),
+        ],
       ),
       backgroundColor: mainColor.withOpacity(0.18),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 1),
-            TopBar(
-              screenSize: screenSize,
-              title: "example@email.com",
+            Consumer<AccountProvider>(
+              builder: (context, account, child) {
+                return TopBar(
+                  screenSize: screenSize,
+                  title: account.account.address.toString(),
+                );
+              }
             ),
             const SizedBox(height: 10),
             Padding(
@@ -59,17 +83,24 @@ class _MessagesScreenState extends State<MessagesScreen> {
               ),
               height: screenSize.height * 0.70,
               width: screenSize.width,
-              child: Column(
-                children: [
-                  MessageBox(
-                    screenSize: screenSize,
-                    from: "User Name <example@email.com>",
-                    to: "User Name <example@email.com>",
-                    time: "Time Frame",
-                    subject: "Subject of email",
-                    details: "Email body",
-                  ),
-                ],
+              child: Consumer<MessagesProvider>(
+                builder: (context, messages, child) {
+                  if (messages.messages.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: messages.messages.length,
+                      itemBuilder: (context, index) => MessageBox(
+                        screenSize: screenSize,
+                        from: "${messages.messages[index].from?.name} <${messages.messages[index].from?.address}>",
+                        to: messages.messages[index].to!,
+                        time: "${messages.messages[index].createdAt}",
+                        subject: "${messages.messages[index].subject}",
+                        details: "${messages.messages[index].intro}",
+                      ),
+                    );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                },
               ),
             ),
           ],

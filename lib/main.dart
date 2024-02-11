@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:tempemailsystemqtec/Provider/account_provider.dart';
 import 'package:tempemailsystemqtec/Provider/domains_provider.dart';
+import 'package:tempemailsystemqtec/Provider/messages_provider.dart';
 import 'package:tempemailsystemqtec/Provider/token_provider.dart';
 import 'package:tempemailsystemqtec/Screens/domain_screen.dart';
 import 'consts.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => DomainsProvider()),
         ChangeNotifierProvider(create: (context) => AccountProvider()),
+        ChangeNotifierProvider(create: (context) => MessagesProvider()),
         ChangeNotifierProvider(create: (context) => TokenProvider())
       ],
       child: MaterialApp(

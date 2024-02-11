@@ -54,14 +54,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   domain: widget.domain,
                   onLogin: () {
                     token.getToken(
-                      email: "${emailController.text}@${widget.domain}",
+                      email: "${emailController.text}${widget.domain}",
                       password: passwordController.text,
                     );
                     if (token.token.token != null) {
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MessagesScreen()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MessagesScreen(),
+                        ),
+                      );
                     }
                   },
                 ),

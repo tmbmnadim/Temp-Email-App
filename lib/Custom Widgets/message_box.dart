@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:tempemailsystemqtec/Models/messages_model.dart';
 import '../consts.dart';
 
 class MessageBox extends StatefulWidget {
@@ -15,7 +15,7 @@ class MessageBox extends StatefulWidget {
 
   final Size screenSize;
   final String from;
-  final String to;
+  final List<To> to;
   final String time;
   final String subject;
   final String details;
@@ -68,17 +68,22 @@ class _MessageBoxState extends State<MessageBox> {
                 ),
               ),
             ),
-            SizedBox(
-              width: widget.screenSize.width * 0.8,
-              child: Text(
-                widget.to,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                ),
-              ),
-            ),
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.to.length,
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    width: widget.screenSize.width * 0.8,
+                    child: Text(
+                      "${widget.to[index].name} <${widget.to[index].address}>",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
+                    ),
+                  );
+                }),
 
             /// ------------ TIME TITLE
             SizedBox(

@@ -19,24 +19,13 @@ Future<AccountModel> createAccountRepo({
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(">>>${await response.stream.bytesToString()}");
       final Map<String, dynamic> data =
           jsonDecode(await response.stream.bytesToString());
       account = AccountModel.fromJson(data);
       EasyLoading.showSuccess("Account Created");
     } else {
-      print(response.reasonPhrase);
       EasyLoading.showError(response.headers["status"]!);
     }
-
-    // if (request.headers["status"] == "201 Created") {
-    //   /// ------------------- Convert response body to Map<String, Dynamic>
-    //   final Map<String, dynamic> data = jsonDecode(request.body);
-    //   account = AccountModel.fromJson(data);
-    //   EasyLoading.showSuccess("Account Created");
-    // } else {
-    //   EasyLoading.showError(response.headers["status"]!);
-    // }
   } catch (e) {
     EasyLoading.showError("createaccountrepo: $e");
   }
