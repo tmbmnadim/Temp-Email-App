@@ -9,14 +9,20 @@ Future<TokenModel> getTokenRepo({
   required String email,
   required String password,
 }) async {
+  EasyLoading.show(status: "Logging in...");
   TokenModel token = TokenModel();
   try {
+    ///---------------------------------------- Generating Request
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse('https://api.mail.tm/token'));
     request.body = json.encode({"address": email, "password": password});
     request.headers.addAll(headers);
+    ///---------------------------------------- Generating Request
 
+    /// Sent the request
     http.StreamedResponse response = await request.send();
+
+
     if (response.statusCode == 200) {
       /// ------------------- Convert response body to Map<String, Dynamic>
       final Map<String, dynamic> data =
@@ -25,6 +31,7 @@ Future<TokenModel> getTokenRepo({
     } else {
       EasyLoading.showError(response.reasonPhrase!);
     }
+    EasyLoading.dismiss();
   } catch (e) {
     EasyLoading.showError("createaccountrepo: $e");
   }

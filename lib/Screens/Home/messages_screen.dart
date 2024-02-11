@@ -20,6 +20,7 @@ class MessagesScreen extends StatefulWidget {
 class _MessagesScreenState extends State<MessagesScreen> {
   @override
   void initState() {
+    /// Retrieving Token and then Messages
     String? token =
         Provider.of<TokenProvider>(context, listen: false).token.token;
     Provider.of<MessagesProvider>(context, listen: false)
@@ -38,17 +39,26 @@ class _MessagesScreenState extends State<MessagesScreen> {
         title: const Text("Temp Mail"),
         actions: [
           IconButton(
-              onPressed: () {
-                String? token =
-                    Provider.of<TokenProvider>(context, listen: false)
-                        .token
-                        .token;
-                Provider.of<MessagesProvider>(context, listen: false)
-                    .getDomains(token: token!);
-                Provider.of<AccountProvider>(context, listen: false)
-                    .getMyAccount(token: token);
-              },
-              icon: Icon(Icons.refresh)),
+            onPressed: () {
+              /// A simple Reload button to reload messages.
+              String? token = Provider.of<TokenProvider>(context, listen: false)
+                  .token
+                  .token;
+              Provider.of<MessagesProvider>(context, listen: false)
+                  .getDomains(token: token!);
+              Provider.of<AccountProvider>(context, listen: false)
+                  .getMyAccount(token: token);
+            },
+            icon: Icon(Icons.refresh),
+          ),
+          IconButton(
+            onPressed: () {
+              /// Remove token and logout
+              Provider.of<TokenProvider>(context, listen: false).cleanToken();
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
       backgroundColor: mainColor.withOpacity(0.18),
@@ -56,6 +66,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
         child: Column(
           children: [
             const SizedBox(height: 1),
+
+            /// ====================== Top Bar with user Email
             Consumer<AccountProvider>(builder: (context, account, child) {
               return TopBar(
                 screenSize: screenSize,
@@ -63,6 +75,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
               );
             }),
             const SizedBox(height: 10),
+
+            /// ============================ Messages Title
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -78,6 +92,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 ),
               ),
             ),
+
+            /// ============================ Messages List
             Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 32,
@@ -90,16 +106,22 @@ class _MessagesScreenState extends State<MessagesScreen> {
                   if (messages.messages.isNotEmpty) {
                     return ListView.builder(
                       itemCount: messages.messages.length,
-                      itemBuilder: (context, index) => MessageBox(
-                        screenSize: screenSize,
-                        from:
-                            "${messages.messages[index].from?.name} <${messages.messages[index].from?.address}>",
-                        to: messages.messages[index].to!,
-                        time: "${messages.messages[index].createdAt}",
-                        subject: "${messages.messages[index].subject}",
-                        details: "${messages.messages[index].intro}",
-                      ),
+
+                      /// ================ Your Messages
+                      itemBuilder: (context, index) {
+                        return MessageBox(
+                          screenSize: screenSize,
+                          from:
+                              "${messages.messages[index].from?.name} <${messages.messages[index].from?.address}>",
+                          to: messages.messages[index].to!,
+                          time: "${messages.messages[index].createdAt}",
+                          subject: "${messages.messages[index].subject}",
+                          details: "${messages.messages[index].intro}",
+                        );
+                      },
                     );
+
+                    /// ============== Messages Loading Indicator
                   } else {
                     return CircularProgressIndicator();
                   }

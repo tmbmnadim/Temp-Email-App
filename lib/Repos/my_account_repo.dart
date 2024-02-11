@@ -8,11 +8,14 @@ Future<AccountModel> getMyAccountRepo({
 }) async {
   AccountModel account = AccountModel();
   try {
+    ///---------------------------------------- Generating Request
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request('GET', Uri.parse('https://api.mail.tm/me'));
     request.body = '''''';
     request.headers.addAll(headers);
+    ///---------------------------------------- Generating Request
 
+    /// Sent the request
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {

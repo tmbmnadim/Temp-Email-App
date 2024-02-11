@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+/// This is used for the top bar under the navbar.
+///
 class TopBoxClipper extends CustomClipper<Path>{
   const TopBoxClipper();
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// These are some widgets that I created for own projects.
+
 class CustomWidgets {
   Widget customTextField({
     String? hintText,

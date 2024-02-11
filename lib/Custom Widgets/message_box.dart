@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tempemailsystemqtec/Models/messages_model.dart';
 import '../consts.dart';
 
+/// This is the widget that represents the email.
+
 class MessageBox extends StatefulWidget {
   const MessageBox({
     super.key,

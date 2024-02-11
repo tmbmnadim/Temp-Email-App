@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../consts.dart';
 
+/// This is the tile that shows the domain name.
+
 class DomainSelectionTile extends StatefulWidget {
   const DomainSelectionTile({
     super.key,

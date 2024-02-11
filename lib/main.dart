@@ -5,7 +5,7 @@ import 'package:tempemailsystemqtec/Provider/account_provider.dart';
 import 'package:tempemailsystemqtec/Provider/domains_provider.dart';
 import 'package:tempemailsystemqtec/Provider/messages_provider.dart';
 import 'package:tempemailsystemqtec/Provider/token_provider.dart';
-import 'package:tempemailsystemqtec/Screens/domain_screen.dart';
+import 'package:tempemailsystemqtec/Screens/domain/domain_screen.dart';
 import 'consts.dart';
 
 void main() {

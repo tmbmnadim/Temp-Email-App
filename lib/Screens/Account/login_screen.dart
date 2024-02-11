@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:tempemailsystemqtec/Provider/token_provider.dart';
 import 'package:tempemailsystemqtec/Screens/Account/create_email_account.dart';
@@ -38,11 +39,15 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             const SizedBox(height: 1),
+
+            /// ========================== TopBar Widget
             TopBar(
               screenSize: screenSize,
               title: "Login",
             ),
             const SizedBox(height: 40),
+
+            /// ================== Login Form
             Consumer<TokenProvider>(builder: (context, token, child) {
               return Padding(
                 padding: const EdgeInsets.symmetric(
@@ -53,10 +58,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   screenSize: screenSize,
                   domain: widget.domain,
                   onLogin: () {
+                    EasyLoading.show(status: "Logging in...");
+                    ///==============Retrieving Token to Login
                     token.getToken(
                       email: "${emailController.text}${widget.domain}",
                       password: passwordController.text,
                     );
+
+                    EasyLoading.dismiss();
+                    /// Let's go to check our messages ===============>>>>>
                     if (token.token.token != null) {
                       Navigator.pushReplacement(
                         context,

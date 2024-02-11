@@ -25,6 +25,8 @@ class DomainScreen extends StatelessWidget {
               title: "Available Domains",
             ),
             const SizedBox(height: 20),
+
+            /// ===================================== List of Available Domains
             Consumer<DomainsProvider>(builder: (context, domains, child) {
               if (domains.domains.isNotEmpty) {
                 return SizedBox(
@@ -35,13 +37,16 @@ class DomainScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return DomainSelectionTile(
                             domain: "${domains.domains[index].domain}",
+
+                            /// Select a Domain
                             onTap: () async {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CreateEmailAccountScreen(
-                                      domain:
-                                          "@${domains.domains[index].domain}"),
+                                  builder: (context) =>
+                                      CreateEmailAccountScreen(
+                                    domain: "@${domains.domains[index].domain}",
+                                  ),
                                 ),
                               );
                             });

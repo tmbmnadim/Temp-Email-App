@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:tempemailsystemqtec/Custom%20Widgets/my_widgets.dart';
 import 'package:tempemailsystemqtec/Custom%20Widgets/top_bar.dart';
 import 'package:tempemailsystemqtec/Provider/account_provider.dart';
-import 'package:tempemailsystemqtec/Provider/token_provider.dart';
-import 'package:tempemailsystemqtec/Screens/Home/messages_screen.dart';
 import 'package:tempemailsystemqtec/consts.dart';
 
 import 'login_screen.dart';
@@ -40,11 +38,15 @@ class _CreateEmailAccountScreenState extends State<CreateEmailAccountScreen> {
         child: Column(
           children: [
             const SizedBox(height: 1),
+
+            /// ============================= TopBar Widget
             TopBar(
               screenSize: screenSize,
               title: "Create Email Account",
             ),
             const SizedBox(height: 40),
+
+            /// ============================= Account Creation Form
             Consumer<AccountProvider>(builder: (context, account, child) {
               return Padding(
                 padding: const EdgeInsets.symmetric(
@@ -61,25 +63,24 @@ class _CreateEmailAccountScreenState extends State<CreateEmailAccountScreen> {
                   loginDomain: widget.domain,
                   domain: widget.domain,
                   onCreate: () {
+                    ///--------------- verifying fields
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
+
+                      /// ---------- AccountProvider.createAccount
                       account.createAccount(
                         email: "${emailController.text}${widget.domain}",
                         password: passwordController.text,
                       );
-                      if (account.account.address != null) {
-                        Provider.of<TokenProvider>(context, listen: false)
-                            .getToken(
-                          email: "${emailController.text}${widget.domain}",
-                          password: passwordController.text,
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MessagesScreen(),
-                          ),
-                        );
-                      }
+
+                      /// Redirecting to Messages Screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              LoginScreen(domain: widget.domain),
+                        ),
+                      );
                     }
                   },
                 ),
