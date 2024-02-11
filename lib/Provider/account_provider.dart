@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tempemailsystemqtec/Models/accounts_model.dart';
+import 'package:tempemailsystemqtec/Repos/my_account_repo.dart';
 import '../Repos/create_accounts_repo.dart';
 
 class AccountProvider extends ChangeNotifier {
@@ -10,6 +11,13 @@ class AccountProvider extends ChangeNotifier {
     account = await createAccountRepo(
       email: email,
       password: password,
+    );
+    notifyListeners();
+  }
+
+  void getMyAccount({required String token}) async {
+    account = await getMyAccountRepo(
+      token: token,
     );
     notifyListeners();
   }

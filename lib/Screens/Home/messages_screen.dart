@@ -24,6 +24,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
         Provider.of<TokenProvider>(context, listen: false).token.token;
     Provider.of<MessagesProvider>(context, listen: false)
         .getDomains(token: token!);
+    Provider.of<AccountProvider>(context, listen: false)
+        .getMyAccount(token: token);
     super.initState();
   }
 
@@ -43,6 +45,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         .token;
                 Provider.of<MessagesProvider>(context, listen: false)
                     .getDomains(token: token!);
+                Provider.of<AccountProvider>(context, listen: false)
+                    .getMyAccount(token: token);
               },
               icon: Icon(Icons.refresh)),
         ],
@@ -52,14 +56,12 @@ class _MessagesScreenState extends State<MessagesScreen> {
         child: Column(
           children: [
             const SizedBox(height: 1),
-            Consumer<AccountProvider>(
-              builder: (context, account, child) {
-                return TopBar(
-                  screenSize: screenSize,
-                  title: account.account.address.toString(),
-                );
-              }
-            ),
+            Consumer<AccountProvider>(builder: (context, account, child) {
+              return TopBar(
+                screenSize: screenSize,
+                title: account.account.address.toString(),
+              );
+            }),
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -90,7 +92,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       itemCount: messages.messages.length,
                       itemBuilder: (context, index) => MessageBox(
                         screenSize: screenSize,
-                        from: "${messages.messages[index].from?.name} <${messages.messages[index].from?.address}>",
+                        from:
+                            "${messages.messages[index].from?.name} <${messages.messages[index].from?.address}>",
                         to: messages.messages[index].to!,
                         time: "${messages.messages[index].createdAt}",
                         subject: "${messages.messages[index].subject}",

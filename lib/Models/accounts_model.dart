@@ -1,5 +1,8 @@
 class AccountModel {
+  String? context;
   String? id;
+  String? type;
+  String? aid;
   String? address;
   int? quota;
   int? used;
@@ -9,16 +12,22 @@ class AccountModel {
   String? updatedAt;
 
   AccountModel(
-      {this.id,
-        this.address,
-        this.quota,
-        this.used,
-        this.isDisabled,
-        this.isDeleted,
-        this.createdAt,
-        this.updatedAt});
+      {this.context,
+      this.id,
+      this.type,
+      this.aid,
+      this.address,
+      this.quota,
+      this.used,
+      this.isDisabled,
+      this.isDeleted,
+      this.createdAt,
+      this.updatedAt});
 
   AccountModel.fromJson(Map<String, dynamic> json) {
+    context = json['@context'];
+    aid = json['@id'];
+    type = json['@type'];
     id = json['id'];
     address = json['address'];
     quota = json['quota'];
@@ -31,6 +40,9 @@ class AccountModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['@context'] = context;
+    data['@id'] = aid;
+    data['@type'] = type;
     data['id'] = id;
     data['address'] = address;
     data['quota'] = quota;
