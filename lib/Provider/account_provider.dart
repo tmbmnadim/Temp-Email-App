@@ -3,7 +3,7 @@ import 'package:tempemailsystemqtec/Models/accounts_model.dart';
 import '../Repos/create_accounts_repo.dart';
 
 class AccountProvider extends ChangeNotifier {
-  late AccountModel account;
+  AccountModel account = AccountModel();
   bool obscureText = true;
 
   void createAccount({required String email, required String password}) async {

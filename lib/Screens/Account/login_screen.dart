@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tempemailsystemqtec/Provider/token_provider.dart';
 import 'package:tempemailsystemqtec/Screens/Account/create_email_account.dart';
+import 'package:tempemailsystemqtec/Screens/Home/messages_screen.dart';
 
 import '../../Custom Widgets/my_widgets.dart';
 import '../../Custom Widgets/top_bar.dart';
@@ -40,17 +43,30 @@ class _LoginScreenState extends State<LoginScreen> {
               title: "Login",
             ),
             const SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 8,
-              ),
-              child: accountForm(
-                screenSize: screenSize,
-                domain: widget.domain,
-                onLogin: () {},
-              ),
-            ),
+            Consumer<TokenProvider>(builder: (context, token, child) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 8,
+                ),
+                child: accountForm(
+                  screenSize: screenSize,
+                  domain: widget.domain,
+                  onLogin: () {
+                    token.getToken(
+                      email: "${emailController.text}@${widget.domain}",
+                      password: passwordController.text,
+                    );
+                    if (token.token.token != null) {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MessagesScreen()));
+                    }
+                  },
+                ),
+              );
+            }),
           ],
         ),
       ),
@@ -151,7 +167,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const CreateEmailAccountScreen(domain: "@test.com"),
+                        builder: (context) =>
+                            const CreateEmailAccountScreen(domain: "@test.com"),
                       ),
                     );
                   },

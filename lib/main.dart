@@ -3,9 +3,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:tempemailsystemqtec/Provider/account_provider.dart';
 import 'package:tempemailsystemqtec/Provider/domains_provider.dart';
-import 'package:tempemailsystemqtec/Screens/Account/create_email_account.dart';
+import 'package:tempemailsystemqtec/Provider/token_provider.dart';
 import 'package:tempemailsystemqtec/Screens/domain_screen.dart';
-import 'Screens/Home/messages_screen.dart';
 import 'consts.dart';
 
 void main() {
@@ -21,7 +20,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DomainsProvider()),
-        ChangeNotifierProvider(create: (context) => AccountProvider())
+        ChangeNotifierProvider(create: (context) => AccountProvider()),
+        ChangeNotifierProvider(create: (context) => TokenProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

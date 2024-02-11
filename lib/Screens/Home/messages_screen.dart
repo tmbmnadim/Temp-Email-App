@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tempemailsystemqtec/Custom%20Widgets/message_box.dart';
 import 'package:tempemailsystemqtec/Custom%20Widgets/top_bar.dart';
 import 'package:tempemailsystemqtec/consts.dart';
@@ -11,6 +12,13 @@ class MessagesScreen extends StatefulWidget {
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
+
+  @override
+  void initState() {
+    Provider.of<MessagesProvider>(context)
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

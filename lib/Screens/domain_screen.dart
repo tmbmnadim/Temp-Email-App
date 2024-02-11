@@ -41,7 +41,7 @@ class DomainScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => CreateEmailAccountScreen(
                                       domain:
-                                          "${domains.domains[index].domain}"),
+                                          "@${domains.domains[index].domain}"),
                                 ),
                               );
                             });

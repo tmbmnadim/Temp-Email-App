@@ -3,27 +3,40 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:tempemailsystemqtec/Models/accounts_model.dart';
 
-String apiUrl = "https://api.mail.tm";
-
 Future<AccountModel> createAccountRepo({
   required String email,
   required String password,
 }) async {
   AccountModel account = AccountModel();
   try {
-    Map<String, dynamic> body = {"address": email, "password": password};
+    var headers = {'Content-Type': 'application/json'};
+    var request =
+        http.Request('POST', Uri.parse('https://api.mail.tm/accounts'));
+    request.body = json.encode({"address": email, "password": password});
 
-    /// -------------- Create Account and Save data
-    final http.Response response =
-        await http.post(Uri.parse("$apiUrl/accounts"), body: body);
-    if (response.headers["status"] == "201 Created") {
-      /// ------------------- Convert response body to Map<String, Dynamic>
-      final Map<String, dynamic> data = jsonDecode(response.body);
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(">>>${await response.stream.bytesToString()}");
+      final Map<String, dynamic> data =
+          jsonDecode(await response.stream.bytesToString());
       account = AccountModel.fromJson(data);
       EasyLoading.showSuccess("Account Created");
     } else {
+      print(response.reasonPhrase);
       EasyLoading.showError(response.headers["status"]!);
     }
+
+    // if (request.headers["status"] == "201 Created") {
+    //   /// ------------------- Convert response body to Map<String, Dynamic>
+    //   final Map<String, dynamic> data = jsonDecode(request.body);
+    //   account = AccountModel.fromJson(data);
+    //   EasyLoading.showSuccess("Account Created");
+    // } else {
+    //   EasyLoading.showError(response.headers["status"]!);
+    // }
   } catch (e) {
     EasyLoading.showError("createaccountrepo: $e");
   }
