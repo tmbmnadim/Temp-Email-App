@@ -14,7 +14,7 @@ Future<List<DomainsModel>> getDomainsRepo() async {
 
     request.headers.addAll(headers);
     http.StreamedResponse response =
-        await request.send().timeout(const Duration(milliseconds: 1000));
+        await request.send();
 
     if (response.statusCode == 200) {
       domains.clear();
@@ -29,6 +29,7 @@ Future<List<DomainsModel>> getDomainsRepo() async {
       EasyLoading.showError(response.reasonPhrase!);
     }
   } catch (e) {
+    print(e);
     EasyLoading.showError("domainsRepo: $e");
   }
 

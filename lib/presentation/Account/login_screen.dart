@@ -64,7 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       password: passwordController.text,
                     );
 
-                    EasyLoading.dismiss();
                     /// Let's go to check our messages ===============>>>>>
                     if (token.token.token != null) {
                       Navigator.pushReplacement(
@@ -74,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     }
+                    EasyLoading.dismiss();
                   },
                 ),
               );
