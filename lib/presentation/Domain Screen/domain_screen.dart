@@ -10,7 +10,7 @@ class DomainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<DomainsProvider>(context).getDomains();
+    Provider.of<DomainsProvider>(context, listen: false).getDomains();
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(

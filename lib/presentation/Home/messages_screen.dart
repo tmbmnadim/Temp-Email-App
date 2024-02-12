@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tempemailsystemqtec/consts.dart';
@@ -15,39 +16,33 @@ class MessagesScreen extends StatefulWidget {
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
+  String? token;
   @override
   void initState() {
-    /// Retrieving Token and then Messages
-    String? token =
-        Provider.of<TokenProvider>(context, listen: false).token.token;
-    Provider.of<MessagesProvider>(context, listen: false)
-        .getDomains(token: token!);
+    token = Provider.of<TokenProvider>(context, listen: false).token.token;
     Provider.of<AccountProvider>(context, listen: false)
-        .getMyAccount(token: token);
+        .getMyAccount(token: token!);
+    Provider.of<MessagesProvider>(context, listen: false)
+        .getMessages(token: token!);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    /// A Timer to check for new messages every 10 seconds.
+    Timer.periodic(
+      const Duration(seconds: 10),
+      (timer) {
+        Provider.of<MessagesProvider>(context, listen: false)
+            .getMessages(token: token!);
+      },
+    );
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Temp Mail"),
         actions: [
-          IconButton(
-            onPressed: () {
-              /// A simple Reload button to reload messages.
-              String? token = Provider.of<TokenProvider>(context, listen: false)
-                  .token
-                  .token;
-              Provider.of<MessagesProvider>(context, listen: false)
-                  .getDomains(token: token!);
-              Provider.of<AccountProvider>(context, listen: false)
-                  .getMyAccount(token: token);
-            },
-            icon: const Icon(Icons.refresh),
-          ),
           IconButton(
             onPressed: () {
               /// Remove token and logout

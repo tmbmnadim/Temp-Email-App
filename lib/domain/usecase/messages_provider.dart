@@ -6,9 +6,8 @@ class MessagesProvider extends ChangeNotifier{
   List<MessageModel> messages = [];
 
   /// Get messages
-
-  void getDomains({required String token}) async {
-    messages = await getMessagesRepo(token: token);
+  void getMessages({required String token}) async {
+    messages = await getMessagesRepo(token: token, preMessages: messages);
     notifyListeners();
   }
 }
