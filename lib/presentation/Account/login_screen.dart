@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const CreateEmailAccountScreen(domain: "@test.com"),
+                            CreateEmailAccountScreen(domain: domain),
                       ),
                     );
                   },

@@ -29,7 +29,6 @@ Future<List<DomainsModel>> getDomainsRepo() async {
       EasyLoading.showError(response.reasonPhrase!);
     }
   } catch (e) {
-    print(e);
     EasyLoading.showError("domainsRepo: $e");
   }
 

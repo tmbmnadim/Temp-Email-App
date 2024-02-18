@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:tempemailsystemqtec/data/Models/accounts_model.dart';
@@ -23,7 +24,7 @@ Future<AccountModel> createAccountRepo({
     http.StreamedResponse response = await request.send();
 
 
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode <= 204) {
       ///-------------------------- Adding the data to account  (AccountModel)
       /// Reading the data from response stream
       final Map<String, dynamic> data =
@@ -33,7 +34,7 @@ Future<AccountModel> createAccountRepo({
       EasyLoading.showSuccess("Account Created");
 
     } else {
-      EasyLoading.showError(response.headers["status"]!);
+      EasyLoading.showError("Status:${response.headers["status"]!}");
     }
     EasyLoading.dismiss();
   } catch (e) {
